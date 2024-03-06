@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    tools {
+        jdk 'JDK'
+        maven 'MAV'
+    }
+
     stages {
         stage('Checkout') {
             steps {
