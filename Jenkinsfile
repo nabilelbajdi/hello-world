@@ -9,16 +9,13 @@ pipeline {
         maven 'MAV'
     }
     stages {
-        stage('Checkout and Build') {
+        stage('Initialize and Build') {
             steps {
                 script {
-                    def branches = params.BRANCH_NAMES.tokenize(',')
+                    def branches = params.BRANCH_NAMES.tokenize(',').collect { it.trim() }
                     branches.each { branch ->
-                        echo "Checking out branch: ${branch} from ${params.REPO_URL}"
-                        // clean the workspace before checking out a new repo/branch to avoid conflicts.
-                        deleteDir() 
-                        git branch: branch, url: params.REPO_URL
-                        // run the build command inside the loop to ensures that it's executed in the context of each checked-out branch.
+                        echo "Checking out and building branch: ${branch}"
+                        checkout([$class: 'GitSCM', branches: [[name: branch]], userRemoteConfigs: [[url: params.REPO_URL]]])
                         sh 'mvn clean install'
                     }
                 }
