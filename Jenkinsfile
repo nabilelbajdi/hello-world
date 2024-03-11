@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the specified repo and branch
-                git branch: "${params.branchName}", url: "${params.repoUrl}"
+                git branch: "${params.BRANCH}", url: "${params.REPO}"
             }
         }
         
