@@ -5,7 +5,10 @@ pipeline {
         string(name: 'REPO', defaultValue: 'https://github.com/nabilelbajdi/hello-world.git', description: 'Repository to build')
         string(name: 'BRANCH', defaultValue: 'main', description: 'The name of the branch to build')
     }
-
+    tools {
+        jdk 'JDK'
+        maven 'MAV'
+    }
     stages {
         stage('Checkout') {
             steps {
