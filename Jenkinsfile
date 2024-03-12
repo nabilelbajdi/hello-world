@@ -21,6 +21,7 @@ pipeline {
 
                     // iterate over each repo-branch pair and build them in sequence
                     for (config in buildConfigurations) {
+                        // print current repository and branch being built to jenkins console
                         echo "Building ${config.repo} on branch ${config.branch}"
                         
                         // checkout the repo and branch
