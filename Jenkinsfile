@@ -19,12 +19,6 @@ pipeline {
                         [repo: 'https://github.com/nabilelbajdi/hello-world2.git', branch: 'b']
                     ]
 
-                    // Dynamically create a stage for each configuration
-                    buildConfigurations.each { config ->
-                        stage("Building ${config.name}") {
-                            steps {
-                                echo "Building ${config.repo} on branch ${config.branch}"
-
                     // iterate over each repo-branch pair and build them in sequence
                     for (config in buildConfigurations) {
                         // print current repository and branch being built to jenkins console
